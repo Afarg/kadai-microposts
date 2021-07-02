@@ -14,17 +14,14 @@
         
         <div class="d-flex">
           <div class="m-2">
-            <% if current_user == micropost.user %>
-              <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+           <%= form_with(model: current_user.favorites.find_by(favorite_id: micropost), local: true, method: :delete) do |f| %>
+              <%= hidden_field_tag :favorite_id, micropost.id %>
+              <%= f.submit 'Unlike', class: 'btn btn-danger btn-block-sm' %>
             <% end %>
           </div>
-          <div class="m-2">  
-            <%= render 'favorites/like_button', favorite_micropost: micropost %>
-          </div>
+          
         </div>
         
       </div>
     </li>
   <% end %>
-  <%= paginate microposts %>
-</ul>
