@@ -14,6 +14,7 @@ class User < ApplicationRecord
     has_many :followers, through: :reverses_of_relationship, source: :user
     has_many :likes, through: :favorites, source: :favorite
     
+    
     def follow(other_user)
         unless self == other_user
           self.relationships.find_or_create_by(follow_id: other_user.id)
